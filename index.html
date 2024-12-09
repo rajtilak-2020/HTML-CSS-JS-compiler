@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Code Editor</title>
+    <link rel="shortcut icon" href="mylogov2.webp" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-mode">
+    <nav class="navbar">
+        <div><a href="https://github.com/rajtilak-2020" class="logo">Web Compiler</a></div>
+        <div class="controls">
+            <button id="runBtn" class="run-btn">Run Code</button>
+            <button id="themeToggle" class="theme-toggle">☀️</button>
+        </div>
+    </nav>
+
+    <main class="editor-container">
+        <div class="panels">
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <h2>HTML</h2>
+                </div>
+                <textarea id="htmlEditor" class="code-editor" spellcheck="false" placeholder="Enter HTML code here..."></textarea>
+            </div>
+
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <h2>CSS</h2>
+                </div>
+                <textarea id="cssEditor" class="code-editor" spellcheck="false" placeholder="Enter CSS code here..."></textarea>
+            </div>
+
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <h2>JavaScript</h2>
+                </div>
+                <textarea id="jsEditor" class="code-editor" spellcheck="false" placeholder="Enter JavaScript code here..."></textarea>
+            </div>
+        </div>
+
+        <div class="preview-container">
+            <div class="panel-header">
+                <h2>Output</h2>
+                <div class="preview-controls">
+                    <button id="fullscreenBtn" class="fullscreen-btn">⛶</button>
+                    <button id="refreshBtn" class="refresh-btn">↻</button>
+                </div>
+            </div>
+            <iframe id="preview" class="preview-frame"></iframe>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

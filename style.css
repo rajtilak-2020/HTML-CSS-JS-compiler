@@ -1,0 +1,313 @@
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text-primary: #2d3436;
+    --text-secondary: #636e72;
+    --accent: #0984e3;
+    --border: #dfe6e9;
+    --editor-bg: #f8f9fa;
+    --editor-text: #2d3436;
+    --editor-height: 500px;
+    --preview-min-height: 500px;
+}
+
+.dark-mode {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #ffffff;
+    --text-secondary: #b2bec3;
+    --accent: #74b9ff;
+    --border: #4a4a4a;
+    --editor-bg: #2d2d2d;
+    --editor-text: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.theme-transition::after {
+    content: '';
+    position: fixed;
+    top: var(--click-y);
+    left: var(--click-x);
+    transform: translate(50%, -50%);
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+    opacity: 0;
+    pointer-events: none;
+    transition: width 0.6s ease-out, height 0.6s ease-out, opacity 0.6s ease-out;
+    z-index: 9999;
+}
+
+.theme-transition.active::after {
+    width: 300vw;
+    height: 300vw;
+    opacity: 0.15;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent);
+    text-shadow: 0 0 15px var(--accent);
+    transition: all 0.3s ease;
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    border: black;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: all 0.3 cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.run-btn {
+    background-color: var(--accent);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(9, 132, 227, 0.3);
+}
+
+.run-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 150, 243, 0.4);
+}
+
+.theme-toggle, .fullscreen-btn {
+    background-color: transparent;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    transition: transform 0.3s ease;
+    
+}
+
+.theme-toggle:hover {
+    transform: rotate(90deg);
+    color: var(--accent);
+    
+}
+.fullscreen-btn:hover{
+    transform: scale(1.5);
+}
+
+.editor-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    min-height: calc(100vh - 4rem);
+    transition: all 0.3s ease;
+}
+
+.panels {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    min-height: var(--editor-height);
+    transition: all 0.3s ease;
+}
+
+.editor-panel {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: var(--editor-height);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.editor-panel:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s ease;
+}
+
+.preview-controls {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.panel-header h2 {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.expand-btn {
+    background: transparent;
+    color: var(--text-secondary);
+    padding: 0.25rem;
+    transition: all 0.3s ease;
+}
+
+.expand-btn:hover {
+    color: var(--accent);
+    transform: scale(1.1);
+}
+
+.code-editor {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    background-color: var(--editor-bg);
+    color: var(--editor-text);
+    border: none;
+    resize: none;
+    transition: all 0.3s ease;
+}
+
+.code-editor:focus {
+    outline: none;
+    background-color: var(--bg-primary);
+}
+
+.preview-container {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: var(--preview-min-height);
+    flex: 1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.preview-container:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.preview-container.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    border-radius: 0;
+}
+
+.preview-frame {
+    width: 100%;
+    height: calc(100% - 48px);
+    border: none;
+    background-color: white;
+    transition: all 0.3s ease;
+    min-height: calc(var(--preview-min-height) - 48px);
+}
+
+.refresh-btn {
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    transition: all 0.8s ease;
+}
+
+.refresh-btn:hover {
+    transform: rotate(180deg);
+    color: var(--accent);
+}
+
+@media (max-width: 1024px) {
+    :root {
+        --editor-height: 250px;
+        --preview-min-height: 400px;
+    }
+
+    .panels {
+        gap: 0.75rem;
+    }
+
+    .editor-container {
+        padding: 1rem;
+        gap: 1rem;
+    }
+}
+@media (max-width: 768px) {
+    :root {
+        --editor-height: 200px;
+        --preview-min-height: 350px;
+    }
+
+    .panels {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .navbar {
+        padding: 0.75rem 1rem;
+    }
+
+    .logo {
+        font-size: 1.25rem;
+    }
+
+    .preview-container:not(.fullscreen) {
+        min-height: var(--preview-min-height);
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --editor-height: 180px;
+        --preview-min-height: 300px;
+    }
+
+    .editor-container {
+        padding: 0.75rem;
+        gap: 0.75rem;
+    }
+
+    .code-editor {
+        font-size: 0.8rem;
+        padding: 0.75rem;
+    }
+}
