@@ -116,12 +116,14 @@ button {
 }
 
 .theme-toggle:hover {
-    transform: rotate(90deg);
+    transform: rotate(35deg);
     color: var(--accent);
     
 }
 .fullscreen-btn:hover{
     transform: scale(1.5);
+    color: var(--accent);
+    text-shadow: 0 0 5px var(--accent);
 }
 
 .editor-container {
@@ -254,6 +256,7 @@ button {
 .refresh-btn:hover {
     transform: rotate(180deg);
     color: var(--accent);
+    text-shadow: 0 0 5px var(--accent);
 }
 
 @media (max-width: 1024px) {
