@@ -1,4 +1,3 @@
-// DOM Elements
 const htmlEditor = document.getElementById('htmlEditor');
 const cssEditor = document.getElementById('cssEditor');
 const jsEditor = document.getElementById('jsEditor');
@@ -14,13 +13,17 @@ const body = document.body;
 // Store the current preview state
 let currentPreviewContent = '';
 
-// Default code templates
-const defaultHTML = `<div class="container">
+// Default code templates that will be displayed on every page load if there are no previous codes stored from previous time.
+const defaultHTML = `<!--This Compiler is Made By K Rajtilak-->
+
+<div class="container">
   <h1>Hello, World!</h1>
   <p>"Start coding and watch your ideas come to life..."</p>
 </div>`;
 
-const defaultCSS = `.container {
+const defaultCSS = `/* This Compiler is Made By K Rajtilak */
+
+.container {
   text-align: center;
   padding: 2rem;
   font-family: sans-serif;
@@ -30,8 +33,8 @@ h1 {
   color: #0984e3;
 }`;
 
-const defaultJS = `//This Editor is Made By K Rajtilak
-// Your JavaScript code here
+const defaultJS = `//This Compiler is Made By K Rajtilak
+
 document.querySelector('h1').addEventListener('click', () => {
   alert('Hello from Raj!');
 });`;
@@ -41,22 +44,22 @@ htmlEditor.value = defaultHTML;
 cssEditor.value = defaultCSS;
 jsEditor.value = defaultJS;
 
-// Theme toggle with shockwave effect
+
 let isDarkMode = true;
 themeToggle.textContent = '☀️';
 
 themeToggle.addEventListener('click', (e) => {
-    // Set click coordinates for shockwave effect
+
     const x = e.clientX;
     const y = e.clientY;
     body.style.setProperty('--click-x', `${x}px`);
     body.style.setProperty('--click-y', `${y}px`);
 
-    // Add transition class and toggle theme
+
     body.classList.add('theme-transition');
     body.classList.add('active');
 
-    // Toggle dark mode after a small delay
+
     setTimeout(() => {
         isDarkMode = !isDarkMode;
         body.classList.toggle('dark-mode');
@@ -64,13 +67,13 @@ themeToggle.addEventListener('click', (e) => {
         localStorage.setItem('darkMode', isDarkMode.toString());
     }, 150);
 
-    // Remove transition classes
+
     setTimeout(() => {
         body.classList.remove('theme-transition', 'active');
     }, 600);
 });
 
-// Fullscreen toggle with smooth transition
+
 let isFullscreen = false;
 fullscreenBtn.addEventListener('click', () => {
     isFullscreen = !isFullscreen;
@@ -139,7 +142,7 @@ function updatePreview() {
     previewDocument.close();
 }
 
-// Event listeners with smooth animations
+// Event listeners
 runBtn.addEventListener('click', () => {
     runBtn.style.transform = 'scale(0.95)';
     setTimeout(() => {
@@ -185,7 +188,7 @@ window.addEventListener('load', () => {
     updatePreview();
 });
 
-// Enhanced panel expansion with smooth transitions
+
 expandBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         const panel = btn.closest('.editor-panel');
@@ -211,7 +214,7 @@ expandBtns.forEach(btn => {
     });
 });
 
-// Utility function for debouncing
+// Utility function
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -224,7 +227,7 @@ function debounce(func, wait) {
     };
 }
 
-// Enhanced tab key handling in editors
+
 [htmlEditor, cssEditor, jsEditor].forEach(editor => {
     editor.addEventListener('keydown', (e) => {
         if (e.key === 'Tab') {
